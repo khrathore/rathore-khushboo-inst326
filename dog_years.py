@@ -2,7 +2,8 @@ import random as rand
 import sys
 
 def dog_years(dog_age):
-    """This is a function to calculate the age of a dog in dog years
+    """
+    This is a function to calculate the age of a dog in dog years
 
     Args:
         dog_age (integer): The provided number that tells the program how old the dog is in human years
