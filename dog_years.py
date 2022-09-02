@@ -2,6 +2,17 @@ import random as rand
 import sys
 
 def dog_years(dog_age):
+    """This is a function to calculate the age of a dog in dog years
+
+    Args:
+        dog_age (integer): The provided number that tells the program how old the dog is in human years
+
+    Raises:
+        ValueError: This error happens if the age is negative
+
+    Returns:
+        int: The age of the dog in dog years
+    """
     if dog_age < 0:
         raise ValueError("Age cannot be a negative number")
     elif dog_age == 0:
