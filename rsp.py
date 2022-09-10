@@ -32,6 +32,7 @@ def winner3(p1,p2):
     # Expression 1 if Condition, else Expression 2
     # Expression can be a statement, not all statements are an expression. Condition is an expression that
     # is always going to be boolean
+    # Expressions evaluate to a value, statement is a line of code that is evaluated
     return(
         "tie" if p1 == p2 else
         "p1" if (p1 == "r" and p2 == "s" or p1 == "p" and p2 == "r" or p1 == "s" and p2 == "p")
