@@ -1,1 +1,25 @@
-Python Fundamental II Lectures
+Python Fundamental II Lectures:
+  Stringss: 
+  Contain text, made up of character, therefore they are a container data type
+  No character data type in python, but there are strings of length 1
+  Strings are ordered sequences (cat vs act)
+  Python strings use Unicode, represent letters from almost all writing systems can be used in python strings
+  String literals:
+    Literal - fixed value in a program (use quotes around it '', "", '''''', """""")
+    Tripe quoted string can have line breaks - often used in Doc Strings
+  String concatenation:
+    Use the + operator to put strings together
+  Accessing individual characters:
+    Each character in a string has an index, starting at 0
+    Use [] to access the individual characters (known as the index operator)
+    Index can be negative, counting from the end of the string (0, 1, 2) is (-3, -2, -1)
+  Accessing slices:
+    Use the index operator to slice strings, format is different
+    Two ways to do it - str[start:stop] or str[start:stop:step]
+    Slice will include start but exclude the stop
+    Using negative values will give you the reverse string
+  Formulated string literals (f-strings):
+    A way to plug values into string literals
+    Contains {} expressions with results of an expression (basically plug things in to a phrase)
+    f"{name} is a {job}" -> always start with an f then a quote
+    Each {} is evaluated and converted to a string
