@@ -39,3 +39,7 @@ Lecture 2:
     Concatenate two lists -> List1 + list2cmdline
     Add one thing to the end -> List.append(ITEM)
     Add multiple things -> List.extend(OTHERLIST)
+Other techniques:
+    List.insert(index, item)
+    list[index] = item
+    list[slice] = list2
