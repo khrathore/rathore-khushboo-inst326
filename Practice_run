@@ -1,0 +1,30 @@
+from argparse import ArgumentParser
+import sys
+
+def evaluate(postfixex):
+    postfixed = postfixex.strip(' \n')
+    stringlist = []
+    for char in postfixed:
+        if char == "+" or char == "-" or char == "/" or char == "*":
+            op2 = float(stringlist.pop())
+            op1 = float(stringlist.pop())
+            if char == '+':
+                result_new = op1 + op2
+                stringlist.append(result_new)
+            elif char == '-':
+                result_new = op1 - op2
+                stringlist.append(result_new)
+            elif char == '/':
+                result_new = op1/op2
+                stringlist.append(result_new)
+            else:
+                result_new = op1*op2
+                stringlist.append(result_new)
+        elif char == ' ':
+            pass
+        else:
+            stringlist.append(int(char))
+    return result_new    
+    
+result = evaluate("5 4 3 0 + - / \n")
+print(result)

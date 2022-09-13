@@ -2,9 +2,18 @@ from argparse import ArgumentParser
 import sys
 
 def evaluate(postfixex):
-    postfixex.strip()
+    """Evaluates a given postfix expression, expects a string as the input.
+
+    Args:
+        postfixex (string): a string that contains a postfix expression
+
+    Returns:
+        float: The value of the post-fix expression evaluation
+    """
+    
+    postfixed = postfixex.replace(" ", "")
     stringlist = []
-    for char in postfixex:
+    for char in postfixed:
         if char == "+" or char == "-" or char == "/" or char == "*":
             op2 = float(stringlist.pop())
             op1 = float(stringlist.pop())
@@ -20,18 +29,24 @@ def evaluate(postfixex):
             else:
                 result_new = op1*op2
                 stringlist.append(result_new)
+        elif char == ' ':
+            pass
         else:
             stringlist.append(int(char))
+    return result_new    
     
+
 def main(filepath):
+    """The function that read and prints the post-fix file and their solutions
+
+    Args:
+        filepath (string): A string that shows where the file that is being read lives.
+    """
     with open(filepath, "r+", encoding="utf-8") as problems:
         for line in problems:
-            newline = line.strip().replace(" ", "")
-            sol = evaluate(newline)
-            
-
-# Replace this comment with your implementations of the evaluate() and main()
-# functions.
+            line = line.strip("\n")
+            sol = evaluate(line)
+            print(f"{line} = {sol}")
 
 def parse_args(arglist):
     """ Process command line arguments.
