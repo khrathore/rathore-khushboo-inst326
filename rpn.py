@@ -11,9 +11,11 @@ def evaluate(postfixex):
         float: The value of the post-fix expression evaluation
     """
     
-    postfixed = postfixex.replace(" ", "")
+    postfixex = postfixex.strip("\n")
+    if len(postfixex) == 1:
+        return postfixex
     stringlist = []
-    for char in postfixed:
+    for char in postfixex:
         if char == "+" or char == "-" or char == "/" or char == "*":
             op2 = float(stringlist.pop())
             op1 = float(stringlist.pop())
