@@ -43,7 +43,11 @@ def main(filepath):
 
     Args:
         filepath (string): A string that shows where the file that is being read lives.
+        
+    Returns:
+        output: prints the postfix expression provided and the resulting value
     """
+    
     with open(filepath, "r+", encoding="utf-8") as problems:
         for line in problems:
             line = line.strip("\n")
