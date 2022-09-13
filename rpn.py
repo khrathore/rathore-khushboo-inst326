@@ -5,9 +5,9 @@ def evaluate(postfixex):
     postfixex.strip()
     stringlist = []
     for char in postfixex:
-        if char == '+' or '-' or '/' or '*':
-            op2 = int(stringlist.pop())
-            op1 = int(stringlist.pop())
+        if char == "+" or char == "-" or char == "/" or char == "*":
+            op2 = float(stringlist.pop())
+            op1 = float(stringlist.pop())
             if char == '+':
                 result_new = op1 + op2
                 stringlist.append(result_new)
@@ -21,14 +21,17 @@ def evaluate(postfixex):
                 result_new = op1*op2
                 stringlist.append(result_new)
         else:
-            stringlist.append(char)
+            stringlist.append(int(char))
     
 def main(filepath):
-    
+    with open(filepath, "r+", encoding="utf-8") as problems:
+        for line in problems:
+            newline = line.strip().replace(" ", "")
+            sol = evaluate(newline)
+            
 
 # Replace this comment with your implementations of the evaluate() and main()
 # functions.
-
 
 def parse_args(arglist):
     """ Process command line arguments.
