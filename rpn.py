@@ -1,7 +1,20 @@
 from argparse import ArgumentParser
 import sys
 
-def evaluate(postfixex):
+def evaluate(expr):
+    stack = []
+    for token in expr.split():
+        if token in ["+", "-", "*", "/"]:
+            num2 = stack.pop()
+            num1 = stack.pop()
+            value = (num1 + num2 if token == "+" else
+                     num1 - num2 if token == "-" else
+                     num1 * num2 if token == "*" else
+                     num1 / num2)
+            stack.append(value)
+        else:
+            stack.append(float(token))
+        
     """Evaluates a given postfix expression, expects a string as the input.
 
     Args:
@@ -9,8 +22,8 @@ def evaluate(postfixex):
 
     Returns:
         float: The value of the post-fix expression evaluation
-    """
     
+    def evaluate(postfixex):
     postfixex = postfixex.strip("\n")
     if len(postfixex) == 1:
         return postfixex
@@ -36,7 +49,7 @@ def evaluate(postfixex):
         else:
             stringlist.append(int(char))
     return result_new    
-    
+    """
 
 def main(filepath):
     """The function that read and prints the post-fix file and their solutions
