@@ -51,12 +51,15 @@ class Car:
             Changes the x and y attributes of the object, therefore moving
             the car around.
         """
-        head_rad = (self.heading)/360*math.pi
+        head_rad = (self.heading)/180*math.pi
         self.x += dist*math.sin(head_rad)
         self.y -= dist*math.cos(head_rad)
         
 def sanity_check():
     """A function that creates and manipulates a car object
+    
+    Results:
+        Returns the Car object created
     
     Side effects:
         Instantiate and manipulate a new car object. Prints out the new
@@ -70,6 +73,7 @@ def sanity_check():
     Car.drive(nyoom, 20)
     print(f"Location: {nyoom.x}, {nyoom.y}")
     print(f"Heading: {nyoom.heading}")
+    return nyoom
     
 if __name__ == "__main__":
     sanity_check()
