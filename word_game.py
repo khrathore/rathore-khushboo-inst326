@@ -30,7 +30,7 @@ class PlayerWords:
         Args:
             filepath (string): The location of the text file that contains the player's words
             
-        Side Effects:
+        Side effects:
             Creates a set of the words that were in the given file
         """
         self.words = set()
@@ -63,7 +63,7 @@ def main(file1, file2):
         file1 (string): The file containing the first player's words
         file2 (string): The file containing the second player's words
         
-    Side Effects:
+    Side effects:
         Prints the score of the team.
     """
     p1 = PlayerWords(file1)
