@@ -54,9 +54,9 @@ class Person:
         # If it is not empty, proceed
         else:
             #Lambda key to sort the list of common people by length of their path
-            common.sort(key = lambda d: len(dictself[d] + ":" + dicto[d]))
+            sorted(common, key = lambda d: len(dictself[d] + ":" + dicto[d]))
             # grab the common person with the shortest length
-            closest = common(0)
+            closest = list(common)[0]
             # pull the dictionary of relationship to this person
             relation = relationships.relationships[dictself[closest] + ":" + dicto[closest]][self.gender]
             # if there is no relationship, return distant relative
@@ -76,14 +76,14 @@ class Family:
             self.people[ind] = person
         # Loop through the given dictionary's parents key and add parents for each individual
         for perpar in famdict["parents"]:
-            p1, p2 = famdict["parents"][perpar]
-            self.people[perpar].add_parent(famdict["individuals"][p1])
-            self.people[perpar].add_parent(famdict["individuals"][p2])
+            (p1, p2) = famdict["parents"][perpar]
+            self.people[perpar].add_parent(self.people[p1])
+            self.people[perpar].add_parent(self.people[p2])
         # Loop through the given dictionary's couples key and set spouses for each individual
         for coup in famdict["couples"]:
-            sp1, sp2 = coup
-            self.people[sp1].set_spouse(famdict["individuals"][sp2])
-            self.people[sp2].set_spouse(famdict["individuals"][sp1])
+            (sp1, sp2) = coup
+            self.people[sp1].set_spouse(self.people[sp1])
+            self.people[sp2].set_spouse(self.people[sp1])
             
     def relation(self, person1, person2):
         return self.people[person1].relation_to(self.people[person2])
