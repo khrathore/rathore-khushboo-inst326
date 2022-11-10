@@ -35,10 +35,17 @@ PITCHES = {
 
 
 class Note:
+    """Creates a note object and defines functions for it
+    
+    Attributes:
+        position(int): The position on a scale of the note
+        perspective(str,optional): Flat or sharp, defaults to None
+    
+    """
     
     def __init__(self, position, perspective=None):
         self.position = POSITIONS[position] if isinstance(position, str) else position
-        if isinstance(self.position, str) and len(position) == 2 and not perspective:
+        if isinstance(position, str) and len(position) == 2 and not perspective:
             self.perspective = position[1]
         else:
             self.perspective = perspective
@@ -65,23 +72,23 @@ class Note:
         dist = (self.position - other.position) % 12
         return dist
     
-    def __rshift__(self, other):
+    def __lshift__(self, other):
         dist1 = (other.position - self.position) % 12
         return dist1
     
     def __repr__(self):
-        f"Note({self.position}, {self.perspective!r})"
+        return f"Note({self.position}, {self.perspective!r})"
         
     def __str__(self):
         pos = PITCHES[self.position]
         if len(pos) == 1:
-            f"{pos}"
+            return f"{pos[0]}"
         elif self.perspective == "b":
-            f"{pos[1]}"
+            return f"{pos[1]}"
         elif self.perspective == "#":
-            f"{pos[0]}"
+            return f"{pos[0]}"
         else:
-            f"{pos}"
+            return f"{pos[0]}/{pos[1]}"
     
     
     
