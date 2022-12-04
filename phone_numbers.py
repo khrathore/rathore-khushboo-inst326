@@ -33,8 +33,14 @@ LETTER_TO_NUMBER = {
 }
 
 
-# Replace this comment with your implementation of the PhoneNumber class and
-# the `read_numbers()` function.
+class PhoneNumber:
+    
+    def __init__(self, phnum):
+        if type(phnum) == int:
+            phnum = str(phnum)
+        self.area_code= 
+        self.exchange_code=
+        self.line_numer=
 
 
 def main(path):
