@@ -38,9 +38,15 @@ class PhoneNumber:
     def __init__(self, phnum):
         if type(phnum) == int:
             phnum = str(phnum)
-        self.area_code= 
-        self.exchange_code=
-        self.line_numer=
+        phnum = re.sub(re.compile(r"\W"),"",phnum)
+        for l in phnum:
+            l=LETTER_TO_NUMBER[l] if l
+        if len(phnum) < 10 or len(phnum) > 11:
+            raise ValueError("I'm sorry, this number is not valid")
+        
+        #self.area_code= 
+        #self.exchange_code=
+        #self.line_numer=
 
 
 def main(path):
