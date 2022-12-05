@@ -35,19 +35,74 @@ LETTER_TO_NUMBER = {
 
 class PhoneNumber:
     
+    """
+    Creates a phone number objects
+    
+    Attributes:
+        area_code(str): A 3-digit string representing the area code
+        exchange_code(str): A 3-digit string representing the exchange code
+        line_number(str): A 4-digit string representing the line number
+    """
+    
     def __init__(self, phnum):
+        # Convert the phone number to a string if it's an integer
         if type(phnum) == int:
             phnum = str(phnum)
+        # If the stype is not a string now, it is not valid
+        elif type(phnum) != str:
+            raise TypeError("I'm sorry, this is not a valid format for your number")
+        # Remove any characters that are not words or between 0-9
         phnum = re.sub(re.compile(r"\W"),"",phnum)
+        # Conditional that removes a leading 1
+        phnum = phnum[1:10] if (len(phnum) == 11 and phnum[0] == 1) else phnum
+        # Look through number and replace any letters with their dictionary match
         for l in phnum:
             l=LETTER_TO_NUMBER[l] if re.match(re.compile(r"[A-Z]"), l) == True else l
-        if len(phnum) < 10 or len(phnum) > 11:
+        # Error check if the number is too long
+        if len(phnum) != 10:
             raise ValueError("I'm sorry, this number is not valid")
-        self.area_code=
-        #self.exchange_code=
-        #self.line_numer=
-
-
+        # Error check for area code conditions
+        if phnum[0] == 0 or phnum[0] == 1 or re.match('11',phnum[1:2]):
+            raise ValueError("I'm sorry, this number is not valid")
+        # Error check for exchange code conditions
+        if phnum[3] == 0 or phnum[3] == 1 or re.match('11',phnum[4:5]):
+            raise ValueError("I'm sorry, this number is not valid")
+        # Assign attributes
+        self.area_code = phnum[0:2]
+        self.exchange_code= phnum[3:5]
+        self.line_number= phnum[6:9] #hehe nice
+    
+    def ___int__(self):
+        # Create a string of the full phone number & return the integer version of it
+        phnum = self.area_code + self.exchange_code + self.line_number
+        return int(phnum)
+    
+    def __repr__(self):
+        return f"Phone Number({(self.area_code + self.exchange_code + self.line_number)!r}"
+    
+    def __str__(self):
+        return f"({self.area_code}) {self.exchange_code} {self.line_number}"
+    
+    def __lt__(self, other):
+        # combine the full number into one string
+        num1 = self.area_code + self.exchange_code + self.line_number
+        num2 = other.area_code + other.exchange_code + other.line_number
+        # compare strings
+        return True if num1 < num2 else False
+            
+            
+def read_numbers(filename):
+    with open(filename, 'r', encoding="utf-8") as op:
+        alist = []
+        for line in op:
+            patt = re.compile(r"^(?P<org>.+)\t(?P<num>.+)")
+            match = patt.search(line)
+            org = match.group("org")
+            pnum = PhoneNumber(match.group("num"))
+            alist.append((org,pnum))
+    return alist.sort(key = lambda f: f(1))
+    
+    
 def main(path):
     """Read data from path and print results.
     
