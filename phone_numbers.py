@@ -40,11 +40,10 @@ class PhoneNumber:
             phnum = str(phnum)
         phnum = re.sub(re.compile(r"\W"),"",phnum)
         for l in phnum:
-            l=LETTER_TO_NUMBER[l] if l
+            l=LETTER_TO_NUMBER[l] if re.match(re.compile(r"[A-Z]"), l) == True else l
         if len(phnum) < 10 or len(phnum) > 11:
             raise ValueError("I'm sorry, this number is not valid")
-        
-        #self.area_code= 
+        self.area_code=
         #self.exchange_code=
         #self.line_numer=
 
