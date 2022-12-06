@@ -49,24 +49,33 @@ class PhoneNumber:
         if type(phnum) == int:
             phnum = str(phnum)
         # If the stype is not a string now, it is not valid
-        elif type(phnum) != str:
-            raise TypeError("I'm sorry, this is not a valid format for your number")
+        try:
+            if type(phnum) != str:
+                raise TypeError
+        except TypeError:
+            print(f"I'm sorry, the number {phnum} is not valid")
         # Remove any characters that are not words or between 0-9
-        phnum = re.sub(re.compile(r"\W"),"",phnum)
-        # Conditional that removes a leading 1
-        phnum = phnum[1:10] if (len(phnum) == 11 and phnum[0] == 1) else phnum
+        phnum = re.sub(re.compile(r"[\W_]"),"",phnum)
         # Look through number and replace any letters with their dictionary match
         for l in phnum:
-            l=LETTER_TO_NUMBER[l] if re.match(re.compile(r"[A-Z]"), l) == True else l
+            patt = re.compile(r"[A-Z]")
+            if not(re.match(patt, l)==None):
+                l=LETTER_TO_NUMBER.get(l)
+        # Conditional that removes a leading 1
+        if phnum[0] == 1:
+            phnum = phnum[1:]
         # Error check if the number is too long
-        if len(phnum) != 10:
-            raise ValueError("I'm sorry, this number is not valid")
-        # Error check for area code conditions
-        if phnum[0] == 0 or phnum[0] == 1 or re.match('11',phnum[1:2]):
-            raise ValueError("I'm sorry, this number is not valid")
-        # Error check for exchange code conditions
-        if phnum[3] == 0 or phnum[3] == 1 or re.match('11',phnum[4:5]):
-            raise ValueError("I'm sorry, this number is not valid")
+        try:
+            if len(phnum) != 10:
+                raise ValueError
+            # Error check for area code conditions
+            elif phnum[0] == 0 or phnum[0] == 1 or re.match('11',phnum[1:2]):
+                raise ValueError
+            # Error check for exchange code conditions
+            elif phnum[3] == 0 or phnum[3] == 1 or re.match('11',phnum[4:5]):
+                raise ValueError
+        except ValueError:
+            print(f"I'm sorry, the number {phnum} is not valid")
         # Assign attributes
         self.area_code = phnum[0:2]
         self.exchange_code= phnum[3:5]
@@ -100,7 +109,7 @@ def read_numbers(filename):
             org = match.group("org")
             pnum = PhoneNumber(match.group("num"))
             alist.append((org,pnum))
-    return alist.sort(key = lambda f: f(1))
+    return alist.sort(key = lambda f: f[1])
     
     
 def main(path):
