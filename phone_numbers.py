@@ -45,6 +45,15 @@ class PhoneNumber:
     """
     
     def __init__(self, phnum):
+        """Create a phone number objects
+
+        Args:
+            phnum (str/int): A string or integer representing a phone number
+
+        Raises:
+            TypeError: If the input is not an int or str
+            ValueError: If the phone number is not valid for various reasons
+        """
         # Convert the phone number to a string if it's an integer
         if type(phnum) == int:
             phnum = str(phnum)
@@ -77,18 +86,24 @@ class PhoneNumber:
         self.line_number= phnum[6:10]
     
     def ___int__(self):
-        # Create a string of the full phone number & return the integer version of it
-        phnum = self.area_code + self.exchange_code + self.line_number
-        return int(phnum)
+        """Create a string of the full phone number & return the integer version of it
+        """
+        inrep = self.area_code + self.exchange_code + self.line_number
+        return inrep
     
     def __repr__(self):
+        """Create a formal representation of the full phone number
+        """
         return f"Phone Number({(self.area_code + self.exchange_code + self.line_number)!r})"
     
     def __str__(self):
-        return f"({self.area_code}) {self.exchange_code} {self.line_number}"
+        """Create an informal representation of the full phone number
+        """
+        return f"({self.area_code}) {self.exchange_code}-{self.line_number}"
     
     def __lt__(self, other):
-        # combine the full number into one string
+        """Create one string of the phone number
+        """
         num1 = self.area_code + self.exchange_code + self.line_number
         num2 = other.area_code + other.exchange_code + other.line_number
         # compare strings
