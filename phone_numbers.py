@@ -53,6 +53,9 @@ class PhoneNumber:
         Raises:
             TypeError: If the input is not an int or str
             ValueError: If the phone number is not valid for various reasons
+            
+        Side Effects:
+            Creates a phone number object
         """
         # Convert the phone number to a string if it's an integer
         if type(phnum) == int:
@@ -88,7 +91,7 @@ class PhoneNumber:
     def ___int__(self):
         """Create a string of the full phone number & return the integer version of it
         """
-        inrep = self.area_code + self.exchange_code + self.line_number
+        inrep = str(self.area_code) + str(self.exchange_code) + str(self.line_number)
         return inrep
     
     def __repr__(self):
@@ -129,6 +132,7 @@ def read_numbers(filename):
             if pnum.area_code != "000":
                 alist.append((org,pnum))
     alist.sort(key = lambda f: f[1])
+    print(alist)
     return alist
     
     
